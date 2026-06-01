@@ -1,21 +1,19 @@
-# Ex.No:2(B) METHODS
+# Ex.No:2(C) ACCESS SPECIFIERS
 
 ## QUESTION:
-Write a method void modifyValue(int num) that tries to modify the passed value(add passed value with 10) and print "Inside method: "+num . 
+Write a Java program to create a class called Person with private instance variables name, age. and country. Provide public getter and setter methods to access and modify these variables.
 
-Show in main() that the original value does not change.
 
-After calling modifyValue(int num) method in main , print the "Outside method: "+num
 
 ## AIM:
-To write a Java program that demonstrates how primitive data is passed by value in methods.
+To write a Java program that defines a class Person with private variables and provides public getter and setter methods for encapsulation.
 
 ## ALGORITHM :
-1.	Define a method modifyValue(int num) that adds 10 to num and prints it.
-2.	In main(), declare num and assign a value (e.g., 20).
-3.	Call modifyValue(num) to show modification inside the method.
-4.	Print the value of num outside the method to show it remains unchanged.
-5.	End the program.
+1. Create a class Person with private variables name, age, and country
+2. Define public getter and setter methods for each variable.
+3. In main(), create a Person object and set values using setters.
+4. Retrieve and display values using getters.
+5. End the program.
 
 
 
@@ -33,19 +31,59 @@ Register Number : 212223220028
 ## SOURCE CODE:
 ```
 import java.util.Scanner;
-class prog {
-    public static void modifyValue(int num) {
-        num = num + 10;
-        System.out.println("Inside method: " + num);
+
+class Person {
+    private String name;
+    private int age;
+    private String country;
+
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public static void main(String[] args) {
- Scanner sc = new Scanner(System.in);
-        int x = sc.nextInt();
-        modifyValue(x);
-        System.out.println("Outside method: " + x);
+    public int getAge() {
+        return age;
+    }
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+    public void setCountry(String country) {
+        this.country = country;
     }
 }
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        Person p = new Person();
+
+        String name = sc.nextLine();
+        int age = sc.nextInt();
+        sc.nextLine(); // consume newline
+        String country = sc.nextLine();
+
+        p.setName(name);
+        p.setAge(age);
+        p.setCountry(country);
+
+        // Print heading before details
+        System.out.println("Person 1");
+        System.out.println("Name: " + p.getName());
+        System.out.println("Age: " + p.getAge());
+        System.out.println("Country: " + p.getCountry());
+
+        sc.close();
+    }
+}
+
 ```
 
 
@@ -54,10 +92,10 @@ class prog {
 
 
 ## OUTPUT:
-<img width="1154" height="333" alt="image" src="https://github.com/user-attachments/assets/64a2d168-cfd2-4e7e-b763-c56f18422db9" />
+<img width="1140" height="654" alt="image" src="https://github.com/user-attachments/assets/d9cffbf8-79b2-493c-813a-eadd64aa66c3" />
 
 
 
 ## RESULT:
-The program successfully shows that primitive data types in Java are passed by value, so changes inside the method don’t affect the original variable.
+The program successfully demonstrates encapsulation using getter and setter methods in Java.
 
