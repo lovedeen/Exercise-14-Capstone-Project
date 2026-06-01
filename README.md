@@ -1,19 +1,22 @@
-# Ex.No:2(E) ACCESS MODIFIERS
+# Ex.No:3(A) INHERITANCE AND AGGREGATION
 
 ## QUESTION:
-Create a class Calculator with: One non-static method add(int a, int b) that returns the sum, One static method info() that says "Calculator is ready".
+A jewelry store tracks gold rates for different types of customers. The base class is Customer with attributes like customerId, name, and purchaseWeight (in grams). There are two types of customers: RegularCustomer and PremiumCustomer. RegularCustomer gets a fixed discount of 2% on the gold rate per gram. PremiumCustomer gets a 5% discount plus a special cashback. The base gold rate per gram is input at runtime. For each customer, calculate the final price they pay:
 
+finalPrice = purchaseWeight * (goldRatePerGram - discount)
 
+For PremiumCustomer, additionally show cashback amount (which is 1% of the final price).
 
 ## AIM:
-To write a Java program that defines a class Calculator with one non-static method for addition and one static method for displaying information.
+To write a Java program using inheritance to calculate the final gold price for different types of customers (Regular and Premium) based on discounts and cashback.
 
 ## ALGORITHM :
-1. Create a class named Calculator.
-2. Define a non-static method add(int a, int b) that returns the sum.
-3. Define a static method info() that prints "Calculator is ready".
-4. In main(), call the static method directly and the non-static method using an object.
-5. Display the result.
+1.	Define a base class Customer with attributes customerId, name, and purchaseWeight.
+2.	Define RegularCustomer subclass with a 2% discount on the gold rate.
+3.	Define PremiumCustomer subclass with a 5% discount and 1% cashback on the final price.
+4.	Input the base gold rate per gram at runtime.
+5.	For each customer, calculate and display the final price (and cashback for premium).
+
 
 
 
@@ -29,37 +32,117 @@ Register Number : 212223220028
 ## SOURCE CODE:
 ```
 import java.util.Scanner;
+import java.text.DecimalFormat;
 
-class Calculator {
+class Customer {
+    String customerId, name;
+    double purchaseWeight, goldRatePerGram;
 
-    // Non-static method to add two numbers
-    int add(int a, int b) {
-        return a + b;
+    Customer(String customerId, String name, double purchaseWeight, double goldRatePerGram) {
+        this.customerId = customerId;
+        this.name = name;
+        this.purchaseWeight = purchaseWeight;
+        this.goldRatePerGram = goldRatePerGram;
     }
 
-    // Static method to display info
-    static void info() {
-        System.out.println("Calculator is ready");
+    double getDiscountRate() {
+        return 0; // Default: no discount
+    }
+
+    double calculateFinalPrice() {
+        double discountAmount = goldRatePerGram * getDiscountRate() / 100;
+        double effectiveRate = goldRatePerGram - discountAmount;
+        return purchaseWeight * effectiveRate;
+    }
+
+    void display() {
+        DecimalFormat df = new DecimalFormat("0.00");
+        System.out.println("Customer ID: " + customerId);
+        System.out.println("Name: " + name);
+        System.out.println("Customer Type: General");
+        System.out.println("Purchase Weight: " + purchaseWeight + " grams");
+        System.out.println("Gold Rate per Gram: " + goldRatePerGram);
+        System.out.println("Discount: " + (int)getDiscountRate() + "%");
+        System.out.println("Final Price: " + df.format(calculateFinalPrice()));
     }
 }
 
-public class Main {
+class RegularCustomer extends Customer {
+    RegularCustomer(String customerId, String name, double purchaseWeight, double goldRatePerGram) {
+        super(customerId, name, purchaseWeight, goldRatePerGram);
+    }
+
+    @Override
+    double getDiscountRate() {
+        return 2.0;
+    }
+
+    @Override
+    void display() {
+        DecimalFormat df = new DecimalFormat("0.00");
+        System.out.println("Customer ID: " + customerId);
+        System.out.println("Name: " + name);
+        System.out.println("Customer Type: Regular");
+        System.out.println("Purchase Weight: " + purchaseWeight + " grams");
+        System.out.println("Gold Rate per Gram: " + goldRatePerGram);
+        System.out.println("Discount: " + (int)getDiscountRate() + "%");
+        System.out.println("Final Price: " + df.format(calculateFinalPrice()));
+    }
+}
+
+class PremiumCustomer extends Customer {
+    PremiumCustomer(String customerId, String name, double purchaseWeight, double goldRatePerGram) {
+        super(customerId, name, purchaseWeight, goldRatePerGram);
+    }
+
+    @Override
+    double getDiscountRate() {
+        return 5.0;
+    }
+
+    double getCashback() {
+        return calculateFinalPrice() * 0.01;
+    }
+
+    @Override
+    void display() {
+        DecimalFormat df = new DecimalFormat("0.00");
+        System.out.println("Customer ID: " + customerId);
+        System.out.println("Name: " + name);
+        System.out.println("Customer Type: Premium");
+        System.out.println("Purchase Weight: " + purchaseWeight + " grams");
+        System.out.println("Gold Rate per Gram: " + goldRatePerGram);
+        System.out.println("Discount: " + (int)getDiscountRate() + "%");
+        System.out.println("Final Price: " + df.format(calculateFinalPrice()));
+        System.out.println("Cashback: " + df.format(getCashback()));
+    }
+}
+
+public class prog {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        int num1 = sc.nextInt();
-        int num2 = sc.nextInt();
+        while (sc.hasNext()) {
+            String type = sc.next();
+            String customerId = sc.next();
+            String name = sc.next();
+            double weight = sc.nextDouble();
+            double goldRate = sc.nextDouble();
 
-        // Call static method
-        Calculator.info();
+            Customer c;
+            if (type.equalsIgnoreCase("Regular")) {
+                c = new RegularCustomer(customerId, name, weight, goldRate);
+            } else if (type.equalsIgnoreCase("Premium")) {
+                c = new PremiumCustomer(customerId, name, weight, goldRate);
+            } else {
+                c = new Customer(customerId, name, weight, goldRate);
+            }
 
-        // Create object to call non-static method
-        Calculator calc = new Calculator();
-        int sum = calc.add(num1, num2);
+            c.display();
+            System.out.println();
+        }
 
-        System.out.println("Sum: " + sum);
-
-        // Do not close scanner in online judges
+        sc.close();
     }
 }
 ```
@@ -69,12 +152,11 @@ public class Main {
 
 
 
+
 ## OUTPUT:
 
-<img width="1242" height="363" alt="image" src="https://github.com/user-attachments/assets/aa3d7e7d-b207-433e-aa1a-8334b0c25139" />
-
+<img width="1290" height="746" alt="image" src="https://github.com/user-attachments/assets/2fcd81a5-afd5-4ad9-a198-f89dcabc4db5" />
 
 
 ## RESULT:
-The program successfully demonstrates the use of static and non-static methods in a class.
-
+The program successfully calculates and displays the final payable price for both Regular and Premium customers with applicable discounts and cashback.
