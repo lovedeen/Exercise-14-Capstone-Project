@@ -1,21 +1,17 @@
-# Ex.No:4(D) DESIGN PATTERN  ---- BEHAVIOUR PATTERN
+# Ex.No:5(A) INPUTSTREAMREADER 
 
 ## QUESTION:
-Create an Article class where changes to the content are saved as mementos. Let the user view and restore any saved version.
+Write a Java program to write characters to a file using FileWriter.
 
 ## AIM:
-To implement the Memento Design Pattern that allows saving and restoring versions of an Article object.
+To write character data into a file using the FileWriter class in Java.
 
 ## ALGORITHM :
-1.	Create ArticleMemento to store article content (state).
-2.	Create Article (Originator) that can write, save, and restore content.
-3.	Create VersionHistory (Caretaker) to store multiple mementos.
-4.	Allow the user to:
-5.	Write new content
-6.	Save current version
-7.	View all saved versions
-8.	Restore any version
-9.	Display restored version content.
+1.	Import java.io.FileWriter and java.io.IOException.
+2.	Take user input using Scanner.
+3.	Create a FileWriter object with the desired file name.
+4.	Use write() method to write text into the file.
+5.	Close the FileWriter and handle exceptions using try-catch.
 
 ## PROGRAM:
  ```
@@ -28,102 +24,34 @@ Register Number : 212223220028
 
 ## SOURCE CODE:
 ```
+import java.io.*;
 
-import java.util.*;
-
-class Article {
-    private String content;
-
-    public Article(String content) {
-        this.content = content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    // Save current state to memento
-    public ArticleMemento save() {
-        return new ArticleMemento(content);
-    }
-
-    // Restore state from memento
-    public void restore(ArticleMemento memento) {
-        this.content = memento.getContent();
-    }
-}
-
-class ArticleMemento {
-    private final String content;
-
-    public ArticleMemento(String content) {
-        this.content = content;
-    }
-
-    public String getContent() {
-        return content;
-    }
-}
-
-class ArticleHistory {
-    private List<ArticleMemento> versions = new ArrayList<>();
-
-    public void saveVersion(Article article) {
-        versions.add(article.save());
-    }
-
-    public ArticleMemento getVersion(int index) {
-        if (index >= 0 && index < versions.size()) {
-            return versions.get(index);
-        }
-        return null;
-    }
-
-    public List<ArticleMemento> getAllVersions() {
-        return versions;
-    }
-}
-
-public class ArticleManager {
+public class FileWriteExample {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            String filename = br.readLine();
+            String content = br.readLine();
 
-        // Read number of versions
-        int n = Integer.parseInt(sc.nextLine());
-        ArticleHistory history = new ArticleHistory();
-        Article article = new Article("");
+            FileWriter fw = new FileWriter(filename);
+            fw.write(content);
+            fw.close();
 
-        // Read and save each version
-        for (int i = 0; i < n; i++) {
-            String content = sc.nextLine();
-            article.setContent(content);
-            history.saveVersion(article);
+            System.out.println("File written successfully.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
         }
-
-        // Read version index to restore (0-based)
-        int restoreIndex = Integer.parseInt(sc.nextLine());
-        ArticleMemento memento = history.getVersion(restoreIndex);
-        if (memento != null) {
-            article.restore(memento);
-            System.out.println(article.getContent());
-        } else {
-            System.out.println("Invalid version");
-        }
-
-        sc.close();
     }
 }
-
 ```
 
+
+
+
+
+
 ## OUTPUT:
-<img width="1240" height="593" alt="image" src="https://github.com/user-attachments/assets/1011ef9f-2030-4cf0-af05-89f76ddb4b89" />
-
-
+<img width="1239" height="395" alt="image" src="https://github.com/user-attachments/assets/f1eb5219-05ab-4882-990c-ab044ebd6ca8" />
 
 ## RESULT:
-The program successfully demonstrates the Memento Pattern, allowing the user to save, view, and restore different versions of an article.
+The program successfully writes the entered text into output.txt using FileWriter.
