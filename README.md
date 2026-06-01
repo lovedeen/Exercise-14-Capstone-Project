@@ -1,19 +1,38 @@
-# Ex.No:4(A) EXCEPTION HANDLING
+# Ex.No:4(B)  IMPLEMENT SOLID PRINCIPLES IN JAVA PROGRAM 
 
 ## QUESTION:
-You wrote a program that stores some input strings into a String array and prints each string in uppercase.
-However, you're getting a NullPointerException.
-What should you check in your array before calling .toUpperCase() on a element?
+At an international airport, only one Radar Control Tower exists. This tower is responsible for handling all flight communications regardless of how many flights are coming in. Each incoming flight must contact this tower to register its approach.
+
+To ensure safety and consistency, all flights must communicate with the same instance of the tower. If multiple towers are created, it may lead to inconsistent instructions — a huge risk in aviation.
+
+Your task is to simulate this system using the Singleton pattern.
+
+Key Hint (Hidden in Story):
+Only one control tower object should exist.
+
+Every flight contacting it should register its name.
+
+You should log the order of flights that contacted the tower.
+
+Input Format:
+First line: Integer n – number of incoming flights
+
+Next n lines: Each line contains the flight name.
+
+Output Format:
+For each flight, print:
+
+[FlightName] registered with Radar Control Tower. Total Flights: [count]
 
 ## AIM:
-To handle a NullPointerException when performing operations on a null string in Java.
+To simulate a radar control system where only one tower instance handles multiple flight communications using the Singleton pattern.
 
 ## ALGORITHM :
-1.	Read a string input from the user.
-2.	If the input is "null", assign null to the variable.
-3.	Try converting the string to uppercase using toUpperCase().
-4.	Catch and handle the NullPointerException if the string is null.
-5.	Print "Null element" in case of exception.
+1.	Create a RadarControlTower class with a private static instance.
+2.	Make the constructor private to prevent multiple object creation.
+3.	Define a getInstance() method to return the single instance.
+4.	Use a registerFlight() method to log flight names and count.
+5.	In main(), get the singleton tower instance and register all flights.
 
 ## PROGRAM:
  ```
@@ -26,28 +45,48 @@ Register Number : 212223220028
 
 ## SOURCE CODE:
 ```
-import java.util.Scanner;
+import java.util.*;
 
-public class NullPointerArrayExample {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+class RadarControlTower {
+    private static RadarControlTower instance;
+    private int flightCount = 0;
 
-        String input = sc.next();
-        String str = input.equalsIgnoreCase("null") ? null : input;
+    private RadarControlTower() {}
 
-        try {
-            System.out.println(str.toUpperCase());
-        } catch (NullPointerException e) {
-            System.out.println("Null element");
+    public static RadarControlTower getInstance() {
+        if (instance == null) {
+            instance = new RadarControlTower();
         }
+        return instance;
+    }
 
-        sc.close();
+    public int registerFlight(String flightName) {
+        flightCount++;
+        return flightCount;
     }
 }
+
+public class prog {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        sc.nextLine();  // consume newline
+
+        for (int i = 0; i < n; i++) {
+            String flight = sc.nextLine();
+            RadarControlTower tower = RadarControlTower.getInstance();
+            int total = tower.registerFlight(flight);
+            System.out.println(flight + " registered with Radar Control Tower. Total Flights: " + total);
+        }
+    }
+}
+
 ```
 
 ## OUTPUT:
-<img width="1266" height="354" alt="image" src="https://github.com/user-attachments/assets/ca3d287f-7bcc-4852-9515-a3ff25df30a1" />
+<img width="1240" height="326" alt="image" src="https://github.com/user-attachments/assets/9c541c2d-69dd-4cd9-a972-4127d57d2425" />
+
+
 
 ## RESULT:
-The program successfully detects and handles NullPointerException by displaying "Null element" when the input is null.
+The program ensures only one Radar Control Tower instance handles all flight communications and correctly displays the total number of registered flights.
