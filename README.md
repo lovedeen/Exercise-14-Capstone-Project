@@ -1,16 +1,19 @@
-# Ex.No:3(F) WRAPPER CLASS
+# Ex.No:4(A) EXCEPTION HANDLING
 
 ## QUESTION:
-Write a Java program to convert a string to an integer using a wrapper class and perform addition.
+You wrote a program that stores some input strings into a String array and prints each string in uppercase.
+However, you're getting a NullPointerException.
+What should you check in your array before calling .toUpperCase() on a element?
 
 ## AIM:
-To convert string inputs into integers using the wrapper class and perform addition.
+To handle a NullPointerException when performing operations on a null string in Java.
 
 ## ALGORITHM :
-1.	Read two numbers as strings.
-2.	Convert them to integers using Integer.parseInt().
-3.	Add the two integers.
-4.	Display the sum.
+1.	Read a string input from the user.
+2.	If the input is "null", assign null to the variable.
+3.	Try converting the string to uppercase using toUpperCase().
+4.	Catch and handle the NullPointerException if the string is null.
+5.	Print "Null element" in case of exception.
 
 ## PROGRAM:
  ```
@@ -25,31 +28,26 @@ Register Number : 212223220028
 ```
 import java.util.Scanner;
 
-public class Main {
+public class NullPointerArrayExample {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
 
-        String str1 = scanner.next();
-
-        String str2 = scanner.next();
-
-        scanner.close();
+        String input = sc.next();
+        String str = input.equalsIgnoreCase("null") ? null : input;
 
         try {
-            int num1 = Integer.parseInt(str1);
-            int num2 = Integer.parseInt(str2);
-
-
-            int sum = num1 + num2;
-            System.out.println("Sum = " + sum);
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid input. Please enter a valid number.");
+            System.out.println(str.toUpperCase());
+        } catch (NullPointerException e) {
+            System.out.println("Null element");
         }
+
+        sc.close();
     }
 }
 ```
+
 ## OUTPUT:
-<img width="1223" height="414" alt="image" src="https://github.com/user-attachments/assets/899591cc-4837-4c4d-9693-94fdcade6361" />
+<img width="1266" height="354" alt="image" src="https://github.com/user-attachments/assets/ca3d287f-7bcc-4852-9515-a3ff25df30a1" />
 
 ## RESULT:
-The program successfully converts strings to integers and displays their sum.
+The program successfully detects and handles NullPointerException by displaying "Null element" when the input is null.
