@@ -1,43 +1,37 @@
-# Ex.No:1(A) INTRODUCTION TO JAVA PROGRAMMING, DATA TYPES, VARIABLES AND OPERATORS
+# Ex.No:1(B) CONDITIONAL STATEMENT
 
 ## QUESTION:
-Lovely is a treasure hunter and has reached the final chamber of the dungeon. To unlock the treasure chest, she must enter a secret 4-digit code.
+The much-anticipated "Publishers Federation Book Expo" has returned, promising an even grander experience with nearly a million books on display. This year, the event is being hosted on the topmost floor—floor number N—of the prestigious Hotel Grand Regency.
 
-A riddle appears on the wall:
+Williams, a passionate book enthusiast, arrives at the expo and is now looking for the fastest way to reach the ground floor from the N-th floor. He has two options: take the stairs or use the elevator.
 
-"The code is hidden in the numbers you enter. Solve these puzzles to form it!"
+The stairs are built at a 45-degree angle, and Williams can descend them at a speed of V1 meters per second. Alternatively, the elevator always starts at the ground floor, travels up to the N-th floor to pick him up (the pickup is instantaneous), and then descends back to the ground floor at a speed of V2 meters per second.
 
-The puzzle has 4 steps:
+The total vertical distance the elevator travels in one complete trip (up and down) is 2 × N meters. Meanwhile, the stairs span a diagonal length of √2 × N meters due to the 45-degree incline.
 
-First digit = sum of the first two numbers
+Your task is to help Williams choose the faster route. Based on the time it would take using either method, determine whether Stairs or Elevator is the better option.
 
-Second digit = difference between the third and fourth numbers
+Input :
+N, V1, and V2 (Follow the same order).
 
-Third digit = product of the second and fourth numbers
+Output :
+Stairs if taking the stairs is faster, or Elevator if the elevator is the quicker option.
 
-Fourth digit = remainder when third number is divided by first number
 
-Input Format:
-Enter four numbers as input (integers):
-
-<number1>
-<number2>
-<number3>
-<number4>
-Output Format:
-
-The treasure code
-The treasure code is: <digit1><digit2><digit3><digit4>
 
 ## AIM:
-To write a Java program that reads four integer inputs from the user, performs arithmetic operations (addition, subtraction, multiplication, and modulus), and combines the results to display a treasure code.
+To write a Java program that determines whether using stairs or an elevator is faster based on given speeds and distance.
 
 ## ALGORITHM :
 1.	Start the program and create a Scanner object.
-2.	Read four integer inputs from the user.
-3.	Compute digit1, digit2, digit3, and digit4 using +, -, *, and % operations.
-4.	Concatenate and print the treasure code.
-5.	Stop the program.
+2. Read three integer inputs — n, v1, and v2.
+3. Calculate elevatorTime = (2 × n) / v2 and stairsTime = (√2 × n) / v1.
+4. Compare both times and print "Stairs" if stairs are faster, else "Elevator".
+5. End the program.
+
+
+
+
 
 ## PROGRAM:
  ```
@@ -48,39 +42,39 @@ Register Number : 212223220028
 */
 ```
 
-## Sourcecode.java:
+## SOURCE CODE:
 ```
 import java.util.Scanner;
 
-public class Main {
+public class prog {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
+        
+        int n = sc.nextInt();
+        int v1 = sc.nextInt();
+        int v2 = sc.nextInt();
 
-        int number1 = Integer.parseInt(scanner.nextLine());
-        int number2 = Integer.parseInt(scanner.nextLine());
-        int number3 = Integer.parseInt(scanner.nextLine());
-        int number4 = Integer.parseInt(scanner.nextLine());
+        double elevatorDistance = 2.0 * n;
+        double elevatorTime = elevatorDistance / v2;
 
-        int digit1 = number1 + number2;
-        int digit2 = number3 - number4;
-        int digit3 = number2 * number4;
-        int digit4 = number3 % number1;
+        double stairsDistance = Math.sqrt(2) * n;
+        double stairsTime = stairsDistance / v1;
 
-        System.out.println("The treasure code is: " + digit1 + "" + digit2 + "" + digit3 + "" + digit4);
+        if (stairsTime < elevatorTime) {
+            System.out.println("Stairs");
+        } else {
+            System.out.println("Elevator");
+        }
 
-        scanner.close();
+        sc.close();
     }
 }
 ```
 
-
-
-
-
-
 ## OUTPUT:
-<img width="1158" height="518" alt="image" src="https://github.com/user-attachments/assets/c58c4aea-a5d2-4032-afb3-dc765bd0f33b" />
+<img width="1151" height="347" alt="image" src="https://github.com/user-attachments/assets/ff0cc3d1-fa02-488b-a30c-bcb7d013aa07" />
 
 
 ## RESULT:
-Thus, the Java program to generate a treasure code using arithmetic operations on four user inputs was successfully executed and the output was verified.
+The program successfully determines the faster option between stairs and elevator.
+
