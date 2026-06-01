@@ -1,20 +1,19 @@
-# Ex.No:2(D) VARIABLE SCOPE AND CONSTRUCTOR
+# Ex.No:2(E) ACCESS MODIFIERS
 
 ## QUESTION:
-Write a class Circle that uses a constructor to calculate area using radius.
+Create a class Calculator with: One non-static method add(int a, int b) that returns the sum, One static method info() that says "Calculator is ready".
 
 
 
 ## AIM:
-To write a Java program that defines a class Circle and uses a constructor to calculate the area using the given radius.
+To write a Java program that defines a class Calculator with one non-static method for addition and one static method for displaying information.
 
 ## ALGORITHM :
-1.	Create a class named Circle.
-2.	Declare variables radius and area.
-3.	Define a parameterized constructor that accepts radius and calculates area = π × r × r.
-4.	Display the area inside the constructor.
-5.	In main(), create an object of Circle and pass the radius.
-
+1. Create a class named Calculator.
+2. Define a non-static method add(int a, int b) that returns the sum.
+3. Define a static method info() that prints "Calculator is ready".
+4. In main(), call the static method directly and the non-static method using an object.
+5. Display the result.
 
 
 
@@ -31,13 +30,16 @@ Register Number : 212223220028
 ```
 import java.util.Scanner;
 
-class Circle {
-    double area;
+class Calculator {
 
-    // Constructor to calculate area
-    Circle(double radius) {
-        area = 3.14159 * radius * radius;
-        System.out.printf("Area of the circle with radius %.2f is %.2f%n", radius, area);
+    // Non-static method to add two numbers
+    int add(int a, int b) {
+        return a + b;
+    }
+
+    // Static method to display info
+    static void info() {
+        System.out.println("Calculator is ready");
     }
 }
 
@@ -45,15 +47,21 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        if (sc.hasNextDouble()) {           // check if input exists
-            double radius = sc.nextDouble();
-            Circle c = new Circle(radius);  // constructor calculates & prints area
-        }
+        int num1 = sc.nextInt();
+        int num2 = sc.nextInt();
 
-        // Do not close Scanner in online judges (prevents hidden test failures)
+        // Call static method
+        Calculator.info();
+
+        // Create object to call non-static method
+        Calculator calc = new Calculator();
+        int sum = calc.add(num1, num2);
+
+        System.out.println("Sum: " + sum);
+
+        // Do not close scanner in online judges
     }
 }
-
 ```
 
 
@@ -62,10 +70,11 @@ public class Main {
 
 
 ## OUTPUT:
-<img width="1244" height="269" alt="image" src="https://github.com/user-attachments/assets/d836eba6-44e0-49ca-8f26-8e7e9e3133a4" />
+
+<img width="1242" height="363" alt="image" src="https://github.com/user-attachments/assets/aa3d7e7d-b207-433e-aa1a-8334b0c25139" />
 
 
 
 ## RESULT:
-The program successfully calculates and displays the area of a circle using a constructor.
+The program successfully demonstrates the use of static and non-static methods in a class.
 
