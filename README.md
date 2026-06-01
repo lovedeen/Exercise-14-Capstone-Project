@@ -1,105 +1,86 @@
-# Exercise-14-Capstone-Project
-# Capstone Project - Personal Finance Categorization and Summary Automation
-~~~
-Name : M.JOHN PALL
-Reg. No : 212224040140 
-~~~
+# Ex.No:1(A) INTRODUCTION TO JAVA PROGRAMMING, DATA TYPES, VARIABLES AND OPERATORS
 
-## Aim
-To automate the process of reading personal transaction data from a CSV file, categorizing expenses into various groups (Food, Transport, Bills, Others), and generating a summary report with total amounts and current date in an Excel file using UiPath.
+## QUESTION:
+Lovely is a treasure hunter and has reached the final chamber of the dungeon. To unlock the treasure chest, she must enter a secret 4-digit code.
 
-## Materials Required
-UiPath Studio (Community/Enterprise Edition)
-Windows OS
-Input transaction file (CSV format)
-Basic knowledge of UiPath:
-Read CSV
-For Each Row
-If Condition
-Dictionary & Variables
-Add Data Row
-Write CSV
+A riddle appears on the wall:
 
-## Procedure
+"The code is hidden in the numbers you enter. Solve these puzzles to form it!"
 
-Step 1: Prepare Input File
-  Create a CSV file named transactions.csv
-  Columns: Date, Description, Amount
-  Example:
-  ~~~
-  2025-05-21, TNEB Online Payment, 600
-  2025-05-21, Swiggy Order, 250
-  ~~~
+The puzzle has 4 steps:
 
-Step 2: Build Category Logic
-  Read the CSV file using Read CSV → Output: dtTransactions.
-  Create a Dictionary variable:
-  Name: categoryTotals
-  Type: Dictionary<String, Double>
-  Default value:
-  ~~~
-  New Dictionary(Of String, Double) From {
-     {"Food", 0},
-     {"Transport", 0},
-     {"Bills", 0},
-     {"Others", 0}
-  }
-  ~~~
-  Loop through each row in dtTransactions with For Each Row.
-  
-  Inside the loop:
-  
-  Assign: desc = row("Description").ToString.ToLower
-  
-  Assign: amount = Convert.ToDouble(row("Amount").ToString)
-  
-  Use If conditions to match descriptions:
-  
-  If desc.Contains("swiggy") Or desc.Contains("zomato") Or desc.Contains("food")
-      → categoryTotals("Food") += amount
-  
-  ElseIf desc.Contains("uber") Or desc.Contains("ola") Or desc.Contains("bus") Or desc.Contains("train")
-      → categoryTotals("Transport") += amount
-  
-  ElseIf desc.Contains("tneb") Or desc.Contains("recharge") Or desc.Contains("bill")
-      → categoryTotals("Bills") += amount
-  
-  Else
-      → categoryTotals("Others") += amount
-  📊 Step 3: Create a Summary Table
-  Add Build Data Table activity → Name it dtSummary
-  
-  Columns: Category (String), Total (Double), Date (String)
-  
-  Use For Each item In categoryTotals
-  
-  Add Data Row:
-  ~~~
-  { item.Key, item.Value, Now.ToString("dd-MM-yyyy") }
-  📤 Step 4: Write Output
-  Use Write CSV activity
-  ~~~
+First digit = sum of the first two numbers
 
-# Sequence :
-![Screenshot 2025-05-24 214511](https://github.com/user-attachments/assets/f6805393-1bf2-4969-9b41-8e16190a8f9a)
+Second digit = difference between the third and fourth numbers
 
-![Screenshot 2025-05-24 214524](https://github.com/user-attachments/assets/4c081d6a-a646-4be7-a0ec-0b1acd4e5d2c)
+Third digit = product of the second and fourth numbers
 
-![Screenshot 2025-05-24 214531](https://github.com/user-attachments/assets/d8dcdece-f510-4976-88fb-6ad91573dbf7)
+Fourth digit = remainder when third number is divided by first number
 
-![Screenshot 2025-05-24 214540](https://github.com/user-attachments/assets/c5d5acbb-9857-4150-b64b-bb5cbdb9f3ec)
+Input Format:
+Enter four numbers as input (integers):
 
-![Screenshot 2025-05-24 214549](https://github.com/user-attachments/assets/c1204893-5e98-4da3-b96c-16d8e8cea658)
+<number1>
+<number2>
+<number3>
+<number4>
+Output Format:
 
-![Screenshot 2025-05-24 214600](https://github.com/user-attachments/assets/e123ffb2-caea-4ec5-af27-e55466d01e6b)
+The treasure code
+The treasure code is: <digit1><digit2><digit3><digit4>
+
+## AIM:
+To write a Java program that reads four integer inputs from the user, performs arithmetic operations (addition, subtraction, multiplication, and modulus), and combines the results to display a treasure code.
+
+## ALGORITHM :
+1.	Start the program and create a Scanner object.
+2.	Read four integer inputs from the user.
+3.	Compute digit1, digit2, digit3, and digit4 using +, -, *, and % operations.
+4.	Concatenate and print the treasure code.
+5.	Stop the program.
+
+## PROGRAM:
+ ```
+/*
+Program to implement Object Oriented Programming Concepts using Java
+Developed By : HAFEEZUL DEEN S
+Register Number : 212223220028
+*/
+```
+
+## Sourcecode.java:
+```
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int number1 = Integer.parseInt(scanner.nextLine());
+        int number2 = Integer.parseInt(scanner.nextLine());
+        int number3 = Integer.parseInt(scanner.nextLine());
+        int number4 = Integer.parseInt(scanner.nextLine());
+
+        int digit1 = number1 + number2;
+        int digit2 = number3 - number4;
+        int digit3 = number2 * number4;
+        int digit4 = number3 % number1;
+
+        System.out.println("The treasure code is: " + digit1 + "" + digit2 + "" + digit3 + "" + digit4);
+
+        scanner.close();
+    }
+}
+```
 
 
-# Input:
-![Screenshot 2025-05-24 214636](https://github.com/user-attachments/assets/2119e283-bd32-4ef8-bfc7-01e8c3034a12)
-
-# Output :
-![Screenshot 2025-05-24 214645](https://github.com/user-attachments/assets/a4f6940b-24ad-4e17-95c6-9799fc3dd69f)
 
 
-# Result :
-The workflow successfully categorizes transaction data based on their description into 4 groups and generates a daily summary in a structured CSV file with date tracking.
+
+
+## OUTPUT:
+<img width="1158" height="518" alt="image" src="https://github.com/user-attachments/assets/c58c4aea-a5d2-4032-afb3-dc765bd0f33b" />
+
+
+## RESULT:
+Thus, the Java program to generate a treasure code using arithmetic operations on four user inputs was successfully executed and the output was verified.
