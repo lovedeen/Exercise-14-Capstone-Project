@@ -1,17 +1,19 @@
-# Ex.No:4(C)  COMPOSITION IN JAVA
+# Ex.No:4(D) DESIGN PATTERN -- ABSTRACT FACTORY
 
 ## QUESTION:
-Create animals from two regions: "Africa" and "Asia". Use Abstract Factory to create families of animals (Herbivore, Carnivore). Print the interaction result.
+Create a program that sends different types of notifications: "email", "sms", and "push". Use the Factory Pattern to generate the appropriate notification sender and call its notifyUser() method.
 
 ## AIM:
-To demonstrate the Abstract Factory Pattern by creating families of related objects (Herbivore and Carnivore) from two regions — Africa and Asia.
+To implement the Factory Design Pattern to send different types of notifications — Email, SMS, and Push.
 
 ## ALGORITHM :
-1.	Define interfaces for Herbivore and Carnivore.
-2.	Create concrete classes for African (Zebra, Lion) and Asian (Deer, Tiger) animals.
-3.	Define an AnimalFactory interface with methods to create herbivores and carnivores.
-4.	Implement concrete factories: AfricaAnimalFactory and AsiaAnimalFactory.
-5.	In main(), use factories to create animals and simulate interactions.
+1.	Create a Notification interface with the method notifyUser().
+2.	Implement this interface in classes EmailNotification, SMSNotification, and PushNotification.
+3.	Create a NotificationFactory class to generate objects based on input type.
+4.	In main(), read the notification type and get the corresponding object from the factory.
+5.	Call the notifyUser() method to send the notification.
+
+
 
 
 
@@ -28,63 +30,75 @@ Register Number : 212223220028
 ```
 import java.util.Scanner;
 
-interface Herbivore {}
-interface Carnivore {
-    void eat(Herbivore h);
+// Notification interface
+interface Notification {
+    void notifyUser();
 }
 
-class Wildebeest implements Herbivore {}
-class Lion implements Carnivore {
-    public void eat(Herbivore h) {
-        System.out.println("Lion eats Wildebeest");
+// Concrete notifications
+class EmailNotification implements Notification {
+    public void notifyUser() {
+        System.out.println("Sending Email Notification");
     }
 }
 
-class Buffalo implements Herbivore {}
-class Tiger implements Carnivore {
-    public void eat(Herbivore h) {
-        System.out.println("Tiger eats Buffalo");
+class SMSNotification implements Notification {
+    public void notifyUser() {
+        System.out.println("Sending SMS Notification");
     }
 }
 
-interface AnimalFactory {
-    Herbivore createHerbivore();
-    Carnivore createCarnivore();
+class PushNotification implements Notification {
+    public void notifyUser() {
+        System.out.println("Sending Push Notification");
+    }
 }
 
-class AfricaFactory implements AnimalFactory {
-    public Herbivore createHerbivore() { return new Wildebeest(); }
-    public Carnivore createCarnivore() { return new Lion(); }
+// Factory class
+class NotificationFactory {
+    public Notification createNotification(String type) {
+        switch(type.toLowerCase()) {
+            case "email": return new EmailNotification();
+            case "sms": return new SMSNotification();
+            case "push": return new PushNotification();
+            default: return null;
+        }
+    }
 }
 
-class AsiaFactory implements AnimalFactory {
-    public Herbivore createHerbivore() { return new Buffalo(); }
-    public Carnivore createCarnivore() { return new Tiger(); }
-}
-
+// Main class
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String region = sc.nextLine().toLowerCase();
-        AnimalFactory factory;
+        NotificationFactory factory = new NotificationFactory();
+        
+        while(true) {
+            String input = sc.nextLine();
+            if(input.equalsIgnoreCase("exit")) break;
 
-        if (region.equals("africa")) factory = new AfricaFactory();
-        else if (region.equals("asia")) factory = new AsiaFactory();
-        else {
-            System.out.println("Invalid region");
-            return;
+            Notification notification = factory.createNotification(input);
+            if(notification != null) {
+                notification.notifyUser();
+            } else {
+                System.out.println("Invalid notification type: " + input);
+            }
         }
 
-        Carnivore carn = factory.createCarnivore();
-        Herbivore herb = factory.createHerbivore();
-        carn.eat(herb);
+        sc.close();
     }
 }
 
 ```
 
+
+
+
+
+
 ## OUTPUT:
-<img width="1283" height="337" alt="image" src="https://github.com/user-attachments/assets/85419bff-8dff-4972-b11d-5e2014f6484b" />
+<img width="1284" height="374" alt="image" src="https://github.com/user-attachments/assets/ea1d8e4c-e2a0-40dc-ac41-02cd410c4c07" />
+
+
 
 ## RESULT:
-The program successfully demonstrates the Abstract Factory Pattern, showing different animal interactions for Africa and Asia.
+The program successfully creates and sends the appropriate type of notification using the Factory Pattern.
