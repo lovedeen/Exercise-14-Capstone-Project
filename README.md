@@ -1,18 +1,19 @@
-# Ex.No:1(D) ARRAYS
+# Ex.No:1(E) STRINGS AND MATH FUNCTION
 
 ## QUESTION:
-Write a Java program to print all elements in an array that are greater than a given value
+Write a java program to replace each space with a hyphen.
+
 
 
 ## AIM:
-To write a Java program that prints all elements in an array greater than a given value.
+To write a Java program that replaces all spaces in a given string with hyphens (-).
 
 ## ALGORITHM :
-1. Start the program and create a Scanner object.
-2. Read the size n and elements of the array.
-3. Read a value to compare with.
-4. Use a loop to check and print elements greater than the given value.
-5. End the program.
+1.	Start the program and create a Scanner object.
+2.	Read a string input from the user.
+3.	Use the replace() method to replace all spaces with -.
+4.	Display the modified string.
+5.	End the program.
 
 
 
@@ -30,32 +31,16 @@ Register Number : 212223220028
 ```
 import java.util.Scanner;
 
-public class ElementsGreaterThanX {
+public class ReplaceSpace {
+    public static String replaceSpaces(String str) {
+        return str.replace(' ', '-');
+    }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        int n = scanner.nextInt();     // size of array
-        int[] arr = new int[n];
-
-        for(int i = 0; i < n; i++) {
-            arr[i] = scanner.nextInt();  // array elements
-        }
-
-        int x = scanner.nextInt();     // value to compare
-
-        boolean found = false;
-
-        for(int i = 0; i < n; i++) {
-            if(arr[i] > x) {
-                System.out.println(arr[i]);
-                found = true;
-            }
-        }
-
-        if(!found) {
-            System.out.println("No elements greater than " + x);
-        }
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+        String result = replaceSpaces(input);
+        System.out.println("Modified string: " + result);
     }
 }
 
@@ -65,12 +50,10 @@ public class ElementsGreaterThanX {
 
 
 
-
 ## OUTPUT:
-<img width="1141" height="823" alt="image" src="https://github.com/user-attachments/assets/34a186f8-3e64-4b59-a0c6-c0fd2da49e52" />
+<img width="1145" height="420" alt="image" src="https://github.com/user-attachments/assets/c831a76c-b77a-4c75-82de-8b9c087033d2" />
 
 
 
 ## RESULT:
-The program successfully prints all array elements greater than the given value.
-
+The program successfully replaces all spaces in the input string with hyphens.
