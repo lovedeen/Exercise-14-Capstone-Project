@@ -1,19 +1,20 @@
-# Ex.No:1(E) STRINGS AND MATH FUNCTION
+# Ex.No:2(A) CLASS AND OBJECT
 
 ## QUESTION:
-Write a java program to replace each space with a hyphen.
+Define a class Teacher with attributes: name (String), subject (String), and experience (int, years). 
 
 
 
 ## AIM:
-To write a Java program that replaces all spaces in a given string with hyphens (-).
+To define a Java class Teacher with attributes name, subject, and experience.
 
 ## ALGORITHM :
-1.	Start the program and create a Scanner object.
-2.	Read a string input from the user.
-3.	Use the replace() method to replace all spaces with -.
-4.	Display the modified string.
+1.	Create a class named Teacher.
+2.	Declare attributes name, subject, and experience.
+3.	Define a constructor to initialize these attributes.
+4.	Add a method displayDetails() to print teacher details.
 5.	End the program.
+
 
 
 
@@ -31,16 +32,26 @@ Register Number : 212223220028
 ```
 import java.util.Scanner;
 
-public class ReplaceSpace {
-    public static String replaceSpaces(String str) {
-        return str.replace(' ', '-');
-    }
+class Teacher {
+    String name;
+    String subject;
+    int experience;
 
+    void printMessage() {
+        System.out.print("Mr. " + name + " teaches " + subject + " and has " + experience + " years experience.");
+    }
+}
+
+class prog {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-        String result = replaceSpaces(input);
-        System.out.println("Modified string: " + result);
+
+        Teacher t = new Teacher();
+        t.name = sc.nextLine();
+        t.subject = sc.nextLine();
+        t.experience = sc.nextInt();
+
+        t.printMessage();
     }
 }
 
@@ -51,9 +62,10 @@ public class ReplaceSpace {
 
 
 ## OUTPUT:
-<img width="1145" height="420" alt="image" src="https://github.com/user-attachments/assets/c831a76c-b77a-4c75-82de-8b9c087033d2" />
+<img width="1242" height="426" alt="image" src="https://github.com/user-attachments/assets/46eae97c-9961-4dff-8ce5-ba60ddcf24f6" />
 
 
 
 ## RESULT:
-The program successfully replaces all spaces in the input string with hyphens.
+The Teacher class is successfully defined with the required attributes and methods.
+
