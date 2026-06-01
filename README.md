@@ -1,20 +1,19 @@
-# Ex.No:2(C) ACCESS SPECIFIERS
+# Ex.No:2(D) VARIABLE SCOPE AND CONSTRUCTOR
 
 ## QUESTION:
-Write a Java program to create a class called Person with private instance variables name, age. and country. Provide public getter and setter methods to access and modify these variables.
+Write a class Circle that uses a constructor to calculate area using radius.
 
 
 
 ## AIM:
-To write a Java program that defines a class Person with private variables and provides public getter and setter methods for encapsulation.
+To write a Java program that defines a class Circle and uses a constructor to calculate the area using the given radius.
 
 ## ALGORITHM :
-1. Create a class Person with private variables name, age, and country
-2. Define public getter and setter methods for each variable.
-3. In main(), create a Person object and set values using setters.
-4. Retrieve and display values using getters.
-5. End the program.
-
+1.	Create a class named Circle.
+2.	Declare variables radius and area.
+3.	Define a parameterized constructor that accepts radius and calculates area = π × r × r.
+4.	Display the area inside the constructor.
+5.	In main(), create an object of Circle and pass the radius.
 
 
 
@@ -32,30 +31,13 @@ Register Number : 212223220028
 ```
 import java.util.Scanner;
 
-class Person {
-    private String name;
-    private int age;
-    private String country;
+class Circle {
+    double area;
 
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-    public void setCountry(String country) {
-        this.country = country;
+    // Constructor to calculate area
+    Circle(double radius) {
+        area = 3.14159 * radius * radius;
+        System.out.printf("Area of the circle with radius %.2f is %.2f%n", radius, area);
     }
 }
 
@@ -63,24 +45,12 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        Person p = new Person();
+        if (sc.hasNextDouble()) {           // check if input exists
+            double radius = sc.nextDouble();
+            Circle c = new Circle(radius);  // constructor calculates & prints area
+        }
 
-        String name = sc.nextLine();
-        int age = sc.nextInt();
-        sc.nextLine(); // consume newline
-        String country = sc.nextLine();
-
-        p.setName(name);
-        p.setAge(age);
-        p.setCountry(country);
-
-        // Print heading before details
-        System.out.println("Person 1");
-        System.out.println("Name: " + p.getName());
-        System.out.println("Age: " + p.getAge());
-        System.out.println("Country: " + p.getCountry());
-
-        sc.close();
+        // Do not close Scanner in online judges (prevents hidden test failures)
     }
 }
 
@@ -92,10 +62,10 @@ public class Main {
 
 
 ## OUTPUT:
-<img width="1140" height="654" alt="image" src="https://github.com/user-attachments/assets/d9cffbf8-79b2-493c-813a-eadd64aa66c3" />
+<img width="1244" height="269" alt="image" src="https://github.com/user-attachments/assets/d836eba6-44e0-49ca-8f26-8e7e9e3133a4" />
 
 
 
 ## RESULT:
-The program successfully demonstrates encapsulation using getter and setter methods in Java.
+The program successfully calculates and displays the area of a circle using a constructor.
 
